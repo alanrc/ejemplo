@@ -1,0 +1,267 @@
+{% extends "base/base.html" %}
+{% block title %} Modificar Funcionario{% endblock title %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<!--alert de bienvenida-->
+        	<ol class="breadcrumb">
+            	<li><a href="{% url 'vista_admin' %}"> Inicio</a></li>
+				<li><a href="{% url 'lista_funcionario' %}"> Funcionario</a></li>
+				<li>	Modificar Funcionario</li>
+            </ol>
+         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<div class="panel app-formulario">
+	 				<h4 class="text-center title-panel"> MODIFICAR FUNCIONARIO </h3>
+	 			<div class="panel-body">
+
+					<form action="" method="POST" enctype='multipart/form-data' class="form-horizontal">{% csrf_token %}
+							{# {{ form|crispy }} #}
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.ci.label }}</label>
+									<div class="col-md-5">
+										{{ form.ci }}<span class="help-block"></span>{{ form.ci.errors }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.nombre.label }}</label>
+									<div class="col-md-5">
+										{{ form.nombre }} {{ form.nombre.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.apellidos.label }}</label>
+									<div class="col-md-5">
+										{{ form.apellidos }} {{ form.apellidos.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" class="control-label col-md-3">{{ form.cargo.label }}</label>
+									<div class="col-md-5">
+										{{ form.cargo }} {{ form.cargo.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-3">{{ form.telefono.label }}</label>
+									<div class="col-md-5">
+										{{ form.telefono }} {{ form.telefono.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="" class="control-label col-md-3">{{ form.direccion.label }}</label>
+									<div class="col-md-5">
+										{{ form.direccion }} {{ form.direccion.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<br>
+						<div class="row text-center">
+							<button  class="btn btn-primary btn-sm btn-flat" id="btnvalidar" type="submit"><span class="glyphicon glyphicon-floppy-save"></span>	Guardar</button>
+							<button  class="btn btn-warning btn-sm btn-flat" type="reset"><span class="icon-paint-format"></span>	Limpiar</button>
+							<a href="{% url 'lista_funcionario' %}" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+						</div><br>
+
+					</form>
+	        	</div>
+	        </div>
+    	</div>
+	</div>
+{% endblock container %}
+{% block js_1 %}
+<script type="text/javascript">
+	$(document).on("ready", inicio);
+
+	function inicio(){
+		$("span.help-block").hide();
+		$("#btnvalidar").click(function(){
+			if(validar()==false && valido()==false && gener()==false && direc()==false && unid()==false && vale()==false && validare()==false)
+				return false;
+			else{
+				// alert("los campos estan validados");
+			}
+		});
+
+		$("#id_nombre").keyup(validar);
+		$("#id_apellidos").keyup(valido);
+		$("#id_telefono").keyup(vale);
+		$("#id_ci").keyup(validare);
+		$("#id_cargo").keyup(gener);
+		$("#id_direccion").keyup(direc);
+		$("#id_unidad").keyup(unid);
+	}
+
+
+	function validar(){
+		var valor = document.getElementById("id_nombre").value;
+		if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_nombre").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z ]+$/.test(valor))) {
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_nombre").parent().children("span").text("Ingrese solo letras").show();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_nombre").parent().children("span").text("").hide();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function valido(){
+		var apellido = document.getElementById("id_apellidos").value;
+		if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+			$("#icono").remove();
+			$("#id_apellidos").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_apellidos").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_apellidos").parent().append("<span id='icono' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z. ]+$/.test(apellido))) {
+			$("#icono").remove();
+			$("#id_apellidos").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_apellidos").parent().children("span").text("Ingrese solo letras").show();
+			$("#id_apellidos").parent().append("<span id='icono' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#icono").remove();
+			$("#id_apellidos").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_apellidos").parent().children("span").text("").hide();
+			$("#id_apellidos").parent().append("<span id='icono' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function gener(){
+		var cargo = document.getElementById("id_cargo").selectedIndex;
+		if( cargo == null || cargo == 0 ) {
+			$('#id_cargo').parent().parent().attr("class", "form-group has-error");
+			return false;
+		}
+		else {
+			$('#id_cargo').parent().parent().attr("class", "form-group has-success");
+			return true;
+		}
+	}
+
+	function unid(){
+		var unidad = document.getElementById("id_unidad").selectedIndex;
+		if( unidad == null || unidad == 0 ) {
+			$('#id_unidad').parent().parent().attr("class", "form-group has-error");
+			return false;
+		}
+		else{
+			$('#id_unidad').parent().parent().attr("class", "form-group has-success");
+			return true;
+		}
+	}
+
+	function direc(){
+		var direccion = document.getElementById("id_direccion").value;
+		if( direccion == null || direccion.length == 0 || /^\s+$/.test(direccion) ) {
+			$("#icon").remove();
+			$("#id_direccion").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_direccion").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_direccion").parent().append("<span id='icon' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z0-9.:/# ]+$/.test(direccion))) {
+			$("#icon").remove();
+			$("#id_direccion").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_direccion").parent().children("span").text("Ingrese solo letras-numeros").show();
+			$("#id_direccion").parent().append("<span id='icon' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#icon").remove();
+			$("#id_direccion").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_direccion").parent().children("span").text("").hide();
+			$("#id_direccion").parent().append("<span id='icon' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function vale(){
+		var telef = document.getElementById("id_telefono").value;
+		if( telef == null || telef.length == 0 || /^\s+$/.test(telef) ) {
+			$("#iconotext").remove();
+			$("#id_telefono").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_telefono").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_telefono").parent().append("<span id='iconotext' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[0-9- ]+$/.test(telef))) {
+			$("#iconotext").remove();
+			$("#id_telefono").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_telefono").parent().children("span").text("Ingrese solo numeros").show();
+			$("#id_telefono").parent().append("<span id='iconotext' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotext").remove();
+			$("#id_telefono").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_telefono").parent().children("span").text("").hide();
+			$("#id_telefono").parent().append("<span id='iconotext' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function validare(){
+		var cedula = document.getElementById("id_ci").value;
+		if( cedula == "" ) {
+			$("#id_ci").parent().parent().attr("class","form-group has-error");
+			$("#id_ci").parent().children("span").text("Este campo es obligatorio").hide();
+		  	return false;
+		}
+		else if( cedula == null || cedula.length == 0 || /^\s+$/.test(cedula) ) {
+			$("#id_ci").remove();
+			$("#id_ci").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_ci").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_ci").parent().append("<span id='iconote' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else{
+			if( isNaN(cedula) ){
+				$("#iconote").remove();
+				$("#id_ci").parent().parent().attr("class", "form-group has-error has-feedback");
+				$("#id_ci").parent().children('span').text("Ingrese solo numeros").show();
+				$("#id_ci").parent().append("<span id='iconote' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+				return false;
+			}
+			else if (!(/^\d{7}$/.test(cedula))) {
+				$("#iconote").remove();
+				$("#id_ci").parent().parent().attr("class","form-group has-error has-feedback");
+				$("#id_ci").parent().children("span").text("Ingrese  solo 7 digitos").show();
+				$("#id_ci").parent().append("<span id='iconote' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+				return false;
+			}
+			else{
+				$("#iconote").remove();
+				$("#id_ci").parent().parent().attr("class","form-group has-success has-feedback");
+				$("#id_ci").parent().children("span").text("").hide();
+				$("#id_ci").parent().append("<span id='iconote' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+				return true;
+			}
+		}
+	}
+</script>
+{% endblock js_1 %}

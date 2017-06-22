@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Buscar Ingresos {% endblock title %}
+
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+				<li><a href="{% url 'vista_admin' %}">	Inicio </a></li>
+				<li><a href="{% url 'lista_mat_ingreso' %}"> Ingreso Material </a></li>
+				<li>	Buscar Ingreso </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+	    <div class="col-md-12 col-sm-12 col-xs-12">
+	       	<div class="panel app-formulario">
+	        		<div class="buscador">
+	        			<form action="" role="search">{% csrf_token %}
+		            		<div class="input-group add-on">
+		            			<input class="form-control input-sm " id="buscar" type="search"placeholder=" Busque por numero de factura">
+		                		<div class="input-group-btn ">
+		                  			<button class="btn btn-warning btn-sm"   type="submit"><i class="glyphicon glyphicon-search "></i></button>
+		                		</div>
+		              		</div>
+            			</form>
+	        		</div><h4 class="title-panel text-center"></h4>
+	        	<div class="panel-body">
+
+					{% csrf_token %}
+					<div id="resultados">
+
+					</div>
+	        	</div>
+    		</div>
+		</div>
+	</div>
+{% endblock container %}
+{% block js_1 %}
+	<script>window.jQuery || document.write('<script src="{% static  'vendors/bootstrap/js/jquery-1.11.2.min.js' %}"><\/script>')</script>
+	<script type="text/javascript">
+		$(document).ready(function($){
+			$("#buscar").keyup(function(event){
+				$.ajax({
+					url: '/buscar/ingreso/',
+					type: 'POST',
+					data:{
+						"buscar":$("#buscar").val(),
+						"csrfmiddlewaretoken":$("input[name=csrfmiddlewaretoken]").val()
+					},
+				})
+				.done(function(respuesta){
+					$("#resultados").html(respuesta)
+				})
+			});
+		});
+	</script>
+{% endblock js_1 %}

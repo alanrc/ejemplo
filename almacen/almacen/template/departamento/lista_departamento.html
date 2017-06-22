@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %} Unidad {% endblock title %}
+
+{% block css %}
+   <style>
+      .app-pagination {
+         margin-top: 0;
+         margin-bottom: 0;
+      }
+      .app-text-pagination {
+         margin-top: 5px;
+      }
+   </style>
+{% endblock css %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+         <ol class="breadcrumb">
+            <li><a href="{% url 'vista_admin' %}"> Inicio</a></li>
+            <li>  Unidad</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row app-search ">
+      <div class="col-md-9 col-xs-12">
+         <a class="btn btn-success btn-sm btn-flat" href="{% url 'registrar_departamento' %}"><span class="glyphicon glyphicon-plus"></span> Agregar Unidad</a>
+      </div>
+    </div>
+    <div class="row">
+       <div class="col-md-12 col-sm-12 col-xs-12">
+         <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+               {% if messages %}
+                  <div class="alert alert-success alert-dismissable fade in" role="alert">
+                     <a href="#"  class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></a>
+                     {% for message in messages %}
+                        <span class="glyphicon glyphicon-ok-circle"></span> &nbsp;&nbsp;&nbsp;{{ message }}
+                     {% endfor %}
+                  </div>
+               {% endif %}
+
+            </div>
+         </div>
+            <div class="panel app-formulario-sm">
+            <h4 class="title-panel text-center">UNIDADES</h4>
+            <div class="panel-body">
+
+               <div class="table-responsive">
+                     <table class="table table-bordered table-hover" id="tabla_categoria">
+                        <thead class="app-thead">
+                           <tr>
+                              <th class="text-center" width="15px">N°</th>
+                              <th class="text-center">Nombre</th>
+                              <th class="text-center" width="150px">Acciones</th>
+                           </tr>
+                        </thead>
+                        {% if object_list %}
+                        <tbody>
+                           {% for u in object_list %}
+                              <tr>
+                                 <td>{{ forloop.counter }}</td>
+                                 <td>{{ u.nombre }}</td>
+                                 <td class="text-center">
+                                    <a class="btn btn-success btn-xs btn-flat" href="{% url 'modificar_departamento' u.id %}" data-toggle="tooltip" data-placement="top" title="Modificar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-danger btn-xs btn-flat" href="{% url 'eliminar_departamento' u.id %}" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+                                 </td>
+                              </tr>
+                           {% endfor %}
+                        </tbody>
+                        {% else %}
+                           <td colspan="4"><p class='text-center'>No hay registros...</hp></td>
+                        {% endif %}
+                     </table>
+               </div>
+                {% include "_pagination.html" %}
+                <p class="app-text-pagination">Visualizando pagina <b>{{ page_obj.number }}</b> de <b>{{ paginator.num_pages }}</b></p>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock container %}

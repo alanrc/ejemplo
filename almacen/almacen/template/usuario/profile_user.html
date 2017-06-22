@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>perfil</title>
+</head>
+<body>
+	
+			<h2>Bienvenido: {{ user.get_full_name }}</h2><br>
+			<h2>Pais : {{user.perfil.pais }}</h2>
+			<img src="/media/{{ user.perfil.avatar}}" alt="avatar">
+			<img src="/media/{{ user.perfil.avatar.url_50x50}}" alt="avatar">
+			<img src="/media/{{ user.perfil.avatar.url_200x200}}" alt="avatar">
+</body>
+</html>

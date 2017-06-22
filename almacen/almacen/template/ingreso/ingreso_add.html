@@ -1,0 +1,228 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Ingreso Material {% endblock title %}
+{% block css %}
+	<style>
+		.icono {
+			/*color: #2ecc74;*/
+			color: #33b5e5;
+			font-size: 15px;
+		}
+	</style>
+{% endblock css %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+            	<li><a href="{% url 'vista_admin' %}"> Inicio</a></li>
+            	<li><a href="{% url 'lista_material' %}"> Material</a></li>
+				<li>	Nuevo Ingreso</li>
+            </ol>
+         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<div class="panel app-formulario">
+	 				<h4 class='text-center title-panel'>  REGISTRAR INGRESO DE MATERIAL </h4>
+	 			<div class="panel-body">
+	 				<p style="color:#33b5e5">&nbsp;&nbsp;<b>{{prod.nombre}}</b> <span class="glyphicon glyphicon-forward icono"></span></p>
+					<form action="" method="POST" enctype='multipart/form-data' class="form-horizontal"> {% csrf_token %}
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.cantidad.label }}</label>
+									<div class="col-md-5">
+										{{ form.cantidad }} {{ form.cantidad.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.precio_u.label }}</label>
+									<div class="col-md-5">
+										{{ form.precio_u }} {{ form.precio_u.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.num_factura.label }}</label>
+									<div class="col-md-5">
+										{{ form.num_factura }} {{ form.num_factura.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<!--div class="form-group">
+									<label for="" class="control-label col-md-4">Unidad Ejecutora :</label>
+									<div class="col-md-5">
+										<input type="text" class="form-control">
+									</div>
+								</div-->
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{form.serie.label}}</label>
+									<div class="col-md-5">
+										{{ form.serie }} {{ form.serie.errors }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{form.codigo.label}}</label>
+									<div class="col-md-5">
+										{{ form.codigo }} {{ form.codigo.errors }}
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{form.funcionario.label}}</label>
+									<div class="col-md-5">
+										{{ form.funcionario }} {{ form.funcionario.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<!--div class="form-group">
+									<label for="tags6" class="control-label col-md-4">Solicitado Por :</label>
+									<div class="col-md-5">
+										<input type="text" class="form-control" id="tags6" placeholder=" Nombre">
+									</div>
+								</div-->
+								<!--div class="form-group">
+									<label for="" class="control-label col-md-4"></label>
+									<div class="col-md-5">
+										<input type="text" class="form-control" placeholder=" Apellidos">
+									</div>
+								</div-->
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{form.objeto.label}}</label>
+									<div class="col-md-5">
+										{{ form.objeto }} {{ form.objeto.errors }}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{form.observacion.label}}</label>
+									<div class="col-md-5">
+										{{ form.observacion }} {{ form.observacion.errors }}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<br>
+						<div class="row text-center">
+							<button  class="btn btn-primary btn-sm btn-flat" type="submit" id="btnvalidar"><span class="glyphicon glyphicon-floppy-save"></span>	Guardar</button>
+							<button  class="btn btn-warning btn-sm btn-flat" type="reset"><span class="icon-paint-format"></span>	Limpiar</button>
+							<a href="{% url 'lista_material' %}" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+						</div><br>
+
+					</form>
+
+	        	</div>
+	        </div>
+    	</div>
+	</div>
+{% endblock container %}
+{% block js_1 %}
+<script type="text/javascript">
+	$(document).on("ready", inicio);
+
+	function inicio(){
+		$("span.help-block").hide();
+		$("#btnvalidar").click(function(){
+			if(validar()==false && unitario()==false && factu()==false && funcionario()==false)
+				return false;
+			else{
+				// alert("los campos estan validados");
+			}
+		});
+
+		$("#id_cantidad").keyup(validar);
+		$("#id_precio_u").keyup(unitario);
+		$("#id_num_factura").keyup(factu);
+		$("#id_funcionario").keyup(funcionario);
+
+	}
+
+	function validar(){
+		var cantidad = document.getElementById("id_cantidad").value;
+		if( cantidad == null || cantidad.length == 0 || /^\s+$/.test(cantidad) ) {
+			$("#iconotext").remove();
+			$("#id_cantidad").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_cantidad").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_cantidad").parent().append("<span id='iconotext' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[0-9]+$/.test(cantidad))) {
+			$("#iconotext").remove();
+			$("#id_cantidad").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_cantidad").parent().children("span").text("Ingrese solo numeros").show();
+			$("#id_cantidad").parent().append("<span id='iconotext' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotext").remove();
+			$("#id_cantidad").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_cantidad").parent().children("span").text("").hide();
+			$("#id_cantidad").parent().append("<span id='iconotext' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function unitario(){
+		var precio = document.getElementById("id_precio_u").value;
+		if( precio == null || precio.length == 0 || /^\s+$/.test(precio) ) {
+			$("#iconotexto").remove();
+			$("#id_precio_u").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_precio_u").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_precio_u").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[0-9-.]+$/.test(precio))) {
+			$("#iconotexto").remove();
+			$("#id_precio_u").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_precio_u").parent().children("span").text("Ingrese solo numeros").show();
+			$("#id_precio_u").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotexto").remove();
+			$("#id_precio_u").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_precio_u").parent().children("span").text("").hide();
+			$("#id_precio_u").parent().append("<span id='iconotexto' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function factu(){
+		var factura = document.getElementById("id_num_factura").value;
+		if( factura == null || factura.length == 0 || /^\s+$/.test(factura) ) {
+			$("#iconote").remove();
+			$("#id_num_factura").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_num_factura").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_num_factura").parent().append("<span id='iconote' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[0-9]+$/.test(factura))) {
+			$("#iconote").remove();
+			$("#id_num_factura").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_num_factura").parent().children("span").text("Ingrese solo numeros").show();
+			$("#id_num_factura").parent().append("<span id='iconote' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconote").remove();
+			$("#id_num_factura").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_num_factura").parent().children("span").text("").hide();
+			$("#id_num_factura").parent().append("<span id='iconote' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+
+	function funcionario(){
+		var fun = document.getElementById("id_funcionario").selectedIndex;
+		if( fun == null || fun == 0 ) {
+			$('#id_funcionario').parent().parent().attr("class", "form-group has-error");
+			return false;
+		}
+		else{
+			$('#id_funcionario').parent().parent().attr("class", "form-group has-success");
+			return true;
+		}
+	}
+</script>
+{% endblock js_1 %}

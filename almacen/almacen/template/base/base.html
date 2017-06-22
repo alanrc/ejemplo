@@ -1,0 +1,170 @@
+{% load staticfiles %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>EMAP | {% block title %}{% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendors/icomoon/icomoon.css' %}">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+        <script src="{% static 'vendors/bootstrap/js/modernizr-2.8.3.min.js' %}"></script>
+
+        {% block js %} {% endblock js %}
+        {% block css %} {% endblock css %}
+
+
+
+    </head>
+    <body class="nav-md footer_fixed">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container body">
+          <div class="main_container">
+            <div class="col-md-3 left_col">
+              <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                  <a href="{% url 'vista_admin' %}" class="site_title"> <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E. M. A. P. </span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile">
+                  <div class="profile_pic">
+                    <!--img src="{{ MEDIA_URL }}{{ user.avatar }}" class="img-circle" alt="User Image" height="20" width="20" >
+                    <span class="hidden-xs">{{ user.username|capfirst }} {{ user.last_name|capfirst }}</span-->
+
+                    <img src="{% static 'img/avatar.png' %}" alt="avatar" class="img-circle profile_img">
+                    <!--img src="{{ user.fotografia.url }}" alt="{{user.fotografia}}" class="img-circle profile_img"-->
+
+                  </div>
+                  <div class="profile_info">
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BIENVENIDO</span>
+                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ user.first_name|capfirst }} <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ user.last_name|capfirst }}</h2>
+                  </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br/>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                  <div class="menu_section"><br><br><br><br>
+                    <h3><!--cargo--></h3>
+                    <ul class="nav side-menu">
+                      <li><a href="/inicio/"><span class="glyphicon glyphicon-home" ></span>  Inicio </a></li>
+                      <li><a><span class="glyphicon glyphicon-folder-open"></span>  &nbsp;Registros <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{% url 'lista_material' %}"> Material </a></li>
+                          <li><a href="{% url 'lista_proveedor' %}"> Proveedor </a></li>
+                          <li><a href="{% url 'lista_marca' %}"> Marca</a></li>
+                          <li><a href="{% url 'lista_categoria' %}"> Categoria</a></li>
+                          <li><a href="{% url 'lista_u_medida' %}"> Unidad de Medida</a></li>
+                          <li><a href="{% url 'lista_almacen' %}"> Almacen</a></li>
+                          <li><a href="{% url 'lista_funcionario' %}"> Funcionario </a></li>
+                          <li><a href="{% url 'lista_departamento' %}"> Unidad </a></li>
+                        </ul>
+                      </li>
+                      <li><a><span class="glyphicon glyphicon-sort"></span> Movimiento <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{% url 'lista_mat_ingreso' %}"> Ingreso de Material</a></li>
+                          <li><a href="{% url 'lista_mat_salida' %}"> Salida de Material</a></li>
+                        </ul>
+                      </li>
+                      <li><a><span class="glyphicon glyphicon-stats"></span> Reportes <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <!--li><a href="{% url 'reporte_fecha' %}"> Por Fecha</a></li-->
+                          <li><a href="{% url 'generar_reporte_lista_ingresos' %}"> Generar Reporte Ingreso</a></li>
+                          <li><a href="{% url 'generar_reporte_lista_salidas' %}"> Generar Reporte Salida</a></li>
+                          <li><a href="{% url 'reporte_material' %}"> Inventario Final</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small">
+                  <a href="http://www.facebook.com" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                  </a>
+                  <a href="http://www.twitter.com" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                  </a>
+                  <a href="http://www.google-plus.com" data-toggle="tooltip" data-placement="top" title="Google Plus" target="_blank">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                  </a>
+                  <a href="http://www.youtube.com" data-toggle="tooltip" data-placement="top" title="Youtube" target="_blank">
+                    <i class="fa fa fa-youtube" aria-hidden="true"></i>
+                  </a>
+                </div>
+                <!-- /menu footer buttons -->
+              </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+              <div class="nav_menu">
+                <nav>
+                  <div class="nav toggle">
+                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                  </div>
+
+                  <ul class="nav navbar-nav navbar-right">
+                    <li class="">
+                      <a href="{% url 'cerrar_sesion' %}"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a>
+                    </li>
+                    <!--li class="">
+                      <a href="{% url 'ayuda' %}" ><span class="glyphicon glyphicon-question-sign"></span>  Ayuda</a>
+                    </li-->
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+
+            <div class="right_col" role="main" id="contenedor">
+
+              {% block container %}{% endblock container %}
+
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+              <div class="pull-right">
+                <a href="#">© E. M. A. P. | 2017 </a>
+              </div>
+              <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+          </div>
+        </div>
+
+
+        <script>window.jQuery || document.write('<script src="{% static 'vendors/bootstrap/js/jquery-1.11.2.min.js' %}"><\/script>')</script>
+        <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/custom.min.js' %}"></script>
+        <!--<script src="{% static 'js/serializeObject.js' %}"></script>-->
+        <script src="{% static 'js/main.js' %}"></script>
+
+        {% block js_1 %}  {% endblock js_1 %}
+
+    </body>
+</html>

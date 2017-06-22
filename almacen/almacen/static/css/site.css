@@ -1,0 +1,50 @@
+.alerta {max-width: 300px;margin: 5px auto 0;}
+.app-help-block a {color: #fff !important;text-decoration: none;}
+
+
+#login-body {
+    background-image:  url(../img/logo.png);
+    background-size: 100vw 100vh;
+	background-attachment: fixed;
+    padding-top: 50px;
+}
+
+.login {
+	max-width: 300px;
+	padding: 15px;
+	margin: auto;
+}
+
+#app-login {
+	max-width: 300px;
+	margin: 50px auto 0;
+	box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+		-webkit-box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+		-moz-box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+	border-radius: 6%;
+		-webkit-border-radius: 6%;
+		-moz-border-radius: 6%;
+	background: rgba(0,0,0,0.4);
+}
+
+#avatar {
+	width: 96px;
+	height: 96px;
+	margin: 0px auto  10px;
+	display: block;
+	border-radius: 50%;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+}
+
+#app-register {
+	max-width: 30%;
+	margin: 20px auto 0;
+	/*box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+		-webkit-box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+		-moz-box-shadow: 0px 0px 18px 0px rgba(48, 50, 50, 0.48);
+	border-radius: 0%;
+		-webkit-border-radius: 0%;
+		-moz-border-radius: 0%;
+	background: rgba(0,0,0,0.4);*/
+}

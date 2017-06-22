@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% block title %} Ayuda {% endblock title %}
+
+{% block css %}
+	<style>
+	  	.contenido-scollspy {
+	  		overflow-y: scroll;
+	  		height: 550px;
+		}
+	</style>
+ {% endblock css %}
+
+ {% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+          	<ol class="breadcrumb">
+          		<li><a href="{% url 'vista_admin' %}">	Inicio </a></li>
+        		<li>  Ayuda </li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="row">
+      	<div class="col-xs-12 col-sm-12 col-md-12">
+	        <!--<ul class="nav nav-tabs">
+	        	<li class="active"><a href="#django" data-toggle="tab">Django</a></li>
+	        	<li><a href="#python" data-toggle="tab">Python</a></li>
+	        	<li><a href="#bootstrap" data-toggle="tab">bootstrap</a></li>
+	        	<li><a href="#html" data-toggle="tab">HTML</a></li>
+	        	<li><a href="#css" data-toggle="tab">CSS</a></li>
+	        </ul>-->
+
+	        <div class="tab-content">
+
+	          	<div class="tab-pane active" id="django">
+
+	            	<div class="row">
+		              	<div class="col-md-9 contenido-scollspy" data-spy="scroll" data-target="#menu" data-offset="0">
+		              		<!--<img src="{{STATIC_URL}}img/logo.png" alt="" class="img-responsive">-->
+
+			                <div class="panel panel-primary" id="dj1">
+			                  	<div class="panel-heading">Introducion a django</div>
+			                  	<div class="panel-body">
+				                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+				                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime voluptates voluptas ut dolor commodi laudantium nulla fuga officia quis non! Quas vel placeat, iusto quo. Iste magni, eos voluptatibus modi!
+			                	</div>
+			                </div>
+			                <div class="panel panel-primary" id="dj2">
+			                  <div class="panel-heading">Introducion a python</div>
+			                  <div class="panel-body">
+			                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+			                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates voluptatum, laudantium consequuntur, veniam odit nostrum et ipsa dolore laborum nihil nesciunt est repellat amet laboriosam non perferendis vitae placeat eius.
+			                  </div>
+			                </div>
+			                <div class="panel panel-primary" id="dj3">
+			                  <div class="panel-heading">Introducion HTML</div>
+			                  <div class="panel-body">
+			                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+			                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+			                  </div>
+			                </div>
+			                <div class="panel panel-primary" id="dj4">
+			                  <div class="panel-heading">Introducion CSS</div>
+			                  <div class="panel-body">
+			                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+			                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+			                  </div>
+			                </div>
+			                <div class="panel panel-primary" id="dj5">
+			                  	<div class="panel-heading">Introducion AJAX</div>
+			                  	<div class="panel-body">
+				                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+				                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas repellendus, quam, dolore reprehenderit, odit voluptatibus, cupiditate nulla cumque autem corporis voluptatum. Consequuntur repudiandae, eius ad natus reiciendis. Esse, nobis, maiores!
+			                  	</div>
+			                </div>
+		              	</div>
+		              	<div class="col-md-3" id="menu">
+		                	<ul class="nav nav-pills nav-stacked">
+		                  		<h4 class="text-center">contenido de django</h4>
+				                <li><a href="#dj1">Introduccion  Django</a></li>
+				                <li><a href="#dj2">Introduccion  Python</a></li>
+				                <li><a href="#dj3">Introduccion HTML</a></li>
+				                <li><a href="#dj4">Introduccion CSS</a></li>
+				                <li><a href="#dj5">Introduccion AJAX</a></li>
+		                	</ul>
+		              	</div>
+	            	</div>
+	          	</div>
+
+	          	<!--<div class="tab-pane" id="python">
+	          		<img src="{{STATIC_URL}}img/logo.jpg" alt="" class="img-responsive">
+	          	</div>
+	          	<div class="tab-pane" id="bootstrap">
+	          		<img src="{{STATIC_URL}}img/logo.png" alt="logo" class="img-responsive">
+	          	</div>
+	          	<div class="tab-pane" id="html">
+	          		<img src="{{STATIC_URL}}img/logo.jpg" alt="" class="img-responsive">
+	          	</div>
+	          	<div class="tab-pane" id="css">
+	          		<img src="{{STATIC_URL}}img/avatar.png" alt="" class="img-responsive">
+	          	</div>-->
+
+	        </div>
+        </div>
+    </div>
+{% endblock container %}

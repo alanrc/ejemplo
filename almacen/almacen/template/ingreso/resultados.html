@@ -1,0 +1,38 @@
+<div class="table-responsive">
+	<table class="table table-bordered table-hover table-striped">
+		<thead class="app-thead">
+			<tr>
+			<th class="text-center" width="15px">N°</th>
+				<th class="text-center">Descripcion</th>
+				<th class="text-center">Cantidad</th>
+				<th class="text-center">Unidad Medida</th>
+				<th class="text-center">Precio Unitario (Bs)</th>
+				<th class="text-center">Precio Total (Bs)</th>
+				<th class="text-center">Fecha de Ingreso</th>
+				<th class="text-center">Acciones</th>
+			</tr>
+		</thead>
+		{% if resultado %}
+			<tbody>
+				{% for prod_ing in resultado %}
+					<tr>
+					<td class="text-center">{{ forloop.counter }}</td>
+						<td>{{ prod_ing.material }}</td>
+						<td class="text-center">{{ prod_ing.cantidad }}</td>
+						<td class="text-center">{{ prod_ing.material.unidad_medida }}</td>
+						<td class="text-center">{{ prod_ing.precio_u }}</td>
+						<td class="text-center">{{ prod_ing.precio_t }}</td>
+						<td class="text-center">{{ prod_ing.fecha_i|date:"d / m / Y"  }}</td>
+						<td class="text-center">
+							<a class="btn btn-default btn-xs  btn-flat" href="/detalle/ingreso/{{prod_ing.id}}/" data-toggle="tooltip" data-placement="top" title="Detalle"><span class="glyphicon glyphicon-zoom-in"></span></a>
+							<!--a class="btn btn-success btn-xs btn-flat disabled" href="" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a-->
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		{% else %}
+			<td colspan="8"><p class='text-center'>No hay ningun registro con ese nombre...</p></td>
+		{% endif %}
+	</table>
+
+</div>

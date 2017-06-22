@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+     <head>
+         <title>Title</title>
+         <style type="text/css">
+            @page {
+                margin-left: 2cm;
+                margin-top: 4.5cm;
+                margin-right: 2cm;
+                margin-bottom:1cm;
+
+                @frame footer {
+                    -pdf-frame-content: footerContent;
+                    bottom: 1cm;
+                    margin-left: 1cm;
+                    margin-right: 1cm;
+                    height: 0cm;
+                }
+            }
+            .header {font-size: 13px;font-weight: 100;text-align: center;color: #000;}
+            .title {font-size: 13px;font-weight: 100;}
+            .hrItem {border: none;height: 1px;color: #333;background-color: #fff;}
+            .firmas{border: none !important; color: #000; font-weight: 100px; margin-top: 250px; text-align: center; font-size: 12px;}
+            .hrline {border: none;height: 1px;color: #333;background-color: #fff; width: 10%;}
+            .deta{text-align: left !important; padding: 3px; font-size: 11px;}
+            .al{text-align: right !important; font-size: 11px; padding: 5px 10px 2px 0px;}
+            .tabla{ text-align: center;font-size: 10px;margin-top: 15px;}
+            .firma{border: none !important; color: #000; font-weight: 100px; text-align: center; font-size: 12px;}
+
+
+         </style>
+    </head>
+    <body>
+        <div class='wraper'>
+            <div class='header'>
+                <h2 class='title'>SALIDA DE MATERIALES</h2>
+            </div>
+            <div>
+                <hr class='hrItem' />
+                <div class="al">
+                    <table border="0.1" align="right">
+                        <tr><td width="130px" style="background-color:#EEEAEA">N° &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 123456789</td></tr>
+                    </table>
+                </div>
+            <div class="deta">
+                <table border="">
+                    <tr><td><b>Unidad Ejecutora</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>{{salida.funcionario.unidad}}</td></tr>
+                    <tr><td><b>Solicitante</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>{{salida.funcionario.nombre}} {{salida.funcionario.apellidos}}</td></tr>
+                    <tr><td><b>Casa Proveedora</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>{{salida.material.proveedor}}</td></tr>
+                    <tr><td><b>Almacen</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>{{salida.material.almacen}}</td></tr>
+                    <tr><td width="300px"><b>Obj. de lo Solicitado</b></td></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>
+                        {% if salida.objeto == "" %}
+
+                        {% else %}
+                            {{salida.objeto}}
+                        {% endif %}
+                    </td></tr>
+                    <tr><td><b>Fecha de Salida</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>{{salida.fecha}}</td></tr>
+                    <tr><td><b>N° de Factura</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>0000-0000</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="tabla">
+            <table border="0.7" style="padding:5px;">
+                <thead>
+                 <tr>
+                     <td><b>DETALLE</b></td>
+                     <td><b>CANTIDAD</b></td>
+                     <td><b>UNIDAD</b></td>
+                     <td><b>PRECIO UNITARIO</b></td>
+                     <td><b>PRECIO TOTAL</b></td>
+                     <td><b>OBSERVACIONES</b></td>
+                 </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{salida.material}}</td>
+                        <td>{{salida.cantidad}}</td>
+                        <td>{{salida.material.unidad_medida}}</td>
+                        <td>000</td>
+                        <td>0000</td>
+                        <td>
+                            {% if salida.observacion == "" %}
+
+                            {% else %}
+                                {{salida.observacion}}
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="firmas">
+            <table>
+                <tr><td>ENTREGUE CONFORME</td><td>RECIBI CONFORME</td><td>VO. BO.</td></tr>
+            </table>
+        </div><br><br><br><br>
+        <div class="firma">
+            <table>
+                <tr><td>___________________________</td><td>___________________________</td><td>___________________________</td></tr>
+            </table><br>
+            <table>
+                <tr><td>Enc. Almacenes</td><td>Nombre y Cargo</td><td>Director Adm. Financiero</td></tr>
+            </table>
+        </div>
+
+        <div id="footerContent">
+            Página: <pdf:pagenumber> de <pdf:pagecount>
+        </div>
+    </body>
+</html>

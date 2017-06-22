@@ -1,0 +1,99 @@
+{% extends "base/base.html" %}
+{% block title %} Marcas {% endblock title %}
+
+{% block css %}
+	<style>
+		.app-pagination {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		.app-text-pagination {
+			margin-top: 5px;
+		}
+	</style>
+{% endblock css %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+				<li><a href="{% url 'vista_admin' %}">	Inicio</a></li>
+				<li>	Marca</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row app-search ">
+		<div class="col-md-9 col-xs-12">
+			<a class="btn btn-success btn-sm btn-flat" href="{% url 'agregar_marca' %}"><span class="glyphicon glyphicon-plus"></span> Agregar Marca</a>
+		</div><!--
+        <div class="col-md-3  col-xs-12 pull-right">
+        	<form action="" role="search">
+            	<div class="input-group add-on">
+            		<input class="form-control input-sm"  type="search" placeholder=" Ingrese su busqueda..">
+                	<div class="input-group-btn ">
+                  		<button class="btn btn-warning btn-sm" type="submit"><i class="glyphicon glyphicon-search "></i></button>
+                	</div>
+              	</div>
+            </form>
+        </div>-->
+    </div>
+    <div class="row">
+	    <div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="row">
+	    		<div class="col-md-6 col-md-offset-3">
+		    		{% if messages %}
+			    		<div class="alert alert-success alert-dismissable fade in" role="alert">
+							<a href="#"  class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></a>
+			    			{% for message in messages %}
+			    				<span class="glyphicon glyphicon-ok-circle"></span> &nbsp;&nbsp;&nbsp;{{ message }}
+			    			{% endfor %}
+			    		</div>
+			    	{% endif %}
+		    	</div>
+	    	</div>
+
+	       	<div class="panel app-formulario-sm">
+	       		<h4 class="title-panel text-center">MARCAS</h4>
+	        	<div class="panel-body">
+
+					<div class="table-responsive">
+
+							<table class="table table-bordered table-hover">
+								<thead class="app-thead">
+									<tr>
+										<th class="text-center" width="15px">N°</th>
+										<th class="text-center">Nombre</th>
+										<th class="text-center">Descripcion</th>
+										<th class="text-center" width="150px">Acciones</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									{% for marcas in object_list %}
+										<tr>
+											<td>{{ forloop.counter }}</td>
+											<td>{{ marcas.nombre }}</td>
+											<td>{{ marcas.descripcion |truncatechars:80}}</td>
+											<td class="text-center">
+												<a class="btn btn-success btn-xs btn-flat" href="/edit/marca/{{marcas.id}}/" data-toggle="tooltip" data-placement="top" title="Modificar"><span class="glyphicon glyphicon-pencil"></span></a>
+												<a class="btn btn-danger btn-xs btn-flat" href="{% url 'eliminar_marca' marcas.id %}" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+											</td>
+										</tr>
+
+								</tbody>
+								{% empty %}
+									<td colspan="4"><p class='text-center'>No hay registros de marcas...</p></td>
+								{% endfor %}
+							</table>
+
+					</div>
+					{% include "_pagination.html" %}
+                	<p class="app-text-pagination">Visualizando pagina <b>{{ page_obj.number }}</b> de <b>{{ paginator.num_pages }}</b></p>
+
+	        	</div>
+    		</div>
+		</div>
+	</div>
+{% endblock container %}
+
+

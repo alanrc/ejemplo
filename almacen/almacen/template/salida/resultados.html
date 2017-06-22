@@ -1,0 +1,38 @@
+<div class="table-responsive">
+
+	<table class="table table-bordered table-hover table-striped">
+		<thead class="app-thead">
+			<tr>
+				<th class="text-center"width="15px">N°</th>
+				<th class="text-center">Descripcion</th>
+				<th class="text-center">Cantidad</th>
+				<th class="text-center">Unidad de Medida</th>
+				<th class="text-center">Precio Unitario (Bs)</th>
+				<th class="text-center">Precio Total (Bs)</th>
+				<th class="text-center">Fecha de Salida</th>
+				<th class="text-center">Acciones</th>
+			</tr>
+		</thead>
+		{% if resultado %}
+			<tbody>
+				{% for sal in resultado %}
+					<tr>
+						<td class="text-center">{{ forloop.counter }}</td>
+						<td>{{ sal.material }}</td>
+						<td class="text-center">{{ sal.cantidad }}</td>
+						<td>{{ sal.material.unidad_medida.nombre }}</td>
+						<td class="text-center">{{ sal.precio_u }}</td>
+						<td class="text-center">{{ sal.precio_t }}</td>
+						<td class="text-center">{{ sal.fecha|date:"d / m / Y" }}</td>
+						<td class="text-center">
+							<a class="btn btn-default btn-xs  btn-flat" href="{% url 'detalle_mat_salida' sal.id %}" data-toggle="tooltip" data-placement="top" title="Detalle"><span class="glyphicon glyphicon-zoom-in"></span></a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		{% else %}
+			<td colspan="8"><p class='text-center'>No hay ningun registro con ese nombre ....</p></td>
+		{% endif %}
+	</table>
+
+</div>

@@ -1,0 +1,37 @@
+<div class="table-responsive">
+	<table class="table table-bordered table-hover">
+		<thead class="app-thead">
+			<tr>
+				<th class="text-center" width="15px">N°</th>
+				<th class="text-center">C.&nbsp;&nbsp;&nbsp; I.</th>
+				<th class="text-center">Nombre</th>
+				<th class="text-center">Apellidos</th>
+				<th class="text-center">Cargo</th>
+				<th class="text-center">Direccion</th>
+				<th class="text-center">Acciones</th>
+			</tr>
+		</thead>
+		{% if resultado %}
+			<tbody>
+				{% for fun in resultado %}
+					<tr>
+						<td class="text-center">{{ forloop.counter }}</td>
+						<td class="text-center">{{ fun.ci }}</td>
+						<td>{{ fun.nombre }}</td>
+						<td>{{ fun.apellidos }}</td>
+						<td>{{ fun.cargo }}</td>
+						<td>{{ fun.direccion }}</td>
+						<td class="text-center">
+							<a class="btn btn-default btn-xs btn-flat" href="{% url 'detalle_funcionario' fun.id %}" data-toggle="tooltip" data-placement="top" title="Detalle"><span class="glyphicon glyphicon-zoom-in"></span></a>
+							<a class="btn btn-success btn-xs btn-flat" href="{% url 'modificar_funcionario' fun.id %}" data-toggle="tooltip" data-placement="top" title="Modificar"><span class="glyphicon glyphicon-pencil"></span></a>
+							<a class="btn btn-danger btn-xs btn-flat" href="{% url 'eliminar_funcionario' fun.id %}" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+
+		{% else %}
+			<td colspan="7"><p class='text-center'>No existe ningun funcionario con esos datos....!!</p></td>
+		{% endif %}
+	</table>
+</div>

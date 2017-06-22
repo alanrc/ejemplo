@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% block title %} Eliminar Unidad {% endblock title %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<!--alert de bienvenida-->
+        	<ol class="breadcrumb">
+                <li><a href="{% url 'vista_admin' %}">	Inicio </a></li>
+                <li><a href="{% url 'lista_departamento' %}">	Unidad </a></li>
+				<li>	Eliminar Unidad </li>
+            </ol>
+         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<div class="panel app-formulario-sm">
+	 			<h4 class="title-panel text-center"><span class="glyphicon glyphicon-warning-sign"></span>&nbsp;&nbsp;&nbsp;¿ Eliminar ?</h4>
+	 			<div class="panel-body">
+
+	        		<form action="" method="POST"> {% csrf_token %}
+						<h4 class="text-center">Desea eliminar la unidad.. <b>{{object.nombre}}</b>...?</h4>
+						<br><br>
+						<div class="row text-center">
+							<button class="btn btn-danger btn-sm btn-flat" type="submit"><span class="glyphicon glyphicon-ok"></span> Si, seguro</button>
+							<a href="{% url 'lista_departamento' %}" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-remove"></span> Cancelar </a>
+						</div><br>
+					</form>
+
+	        	</div>
+	        </div>
+    	</div>
+	</div>
+{% endblock container %}
+

@@ -1,0 +1,94 @@
+{% extends 'base/base.html' %}
+{% block title %} Editar Almacen{% endblock title %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+            	<li><a href="{% url 'vista_admin' %}"> Inicio</a></li>
+				<li><a href="/almacen/"> Almacen</a></li>
+				<li>	 Editar Almacen </li>
+            </ol>
+         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<div class="panel app-formulario-sm">
+				<h4 class="title-panel text-center">EDITAR ALMACEN</h4>
+	 			<div class="panel-body">
+
+					<form action="" method="POST" enctype='multipart/form-data' class="form-horizontal"> {% csrf_token %}
+						<div class="row">
+							<div class="col-md-offset-3 col-md-6">
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.nombre.label }}</label>
+									<div class="col-md-6">
+										{{ form.nombre }}{{form.nombre.errors}}
+										<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.descripcion.label }}</label>
+									<div class="col-md-6">
+										{{ form.descripcion }} {{ form.descripcion.errors }}
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<br>
+						<div class="row text-center">
+							<button  class="btn btn-primary btn-sm btn-flat" type="submit" id="btnvalidar"><span class="glyphicon glyphicon-floppy-save"></span>	Guardar</button>
+							<button  class="btn btn-warning btn-sm btn-flat" type="reset"><span class="icon-paint-format"></span>	Limpiar</button>
+							<a href="/almacen/" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+						</div><br>
+
+					</form>
+
+	        	</div>
+	        </div>
+    	</div>
+	</div>
+{% endblock container %}
+{% block js_1 %}
+<script type="text/javascript">
+	$(document).on("ready", inicio);
+
+	function inicio(){
+		$("span.help-block").hide();
+		$("#btnvalidar").click(function(){
+			if(validar()==false)
+				return false;
+			else{
+				// alert("los campos estan validados");
+			}
+		});
+		$("#id_nombre").keyup(validar);
+	}
+
+	function validar(){
+		var valor = document.getElementById("id_nombre").value;
+		if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_nombre").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z ]+$/.test(valor))) {
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_nombre").parent().children("span").text("Ingrese solo letras").show();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_nombre").parent().children("span").text("").hide();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+</script>
+{% endblock js_1 %}

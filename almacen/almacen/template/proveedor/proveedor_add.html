@@ -1,0 +1,323 @@
+{% extends "base/base.html" %}
+{% block title %} Registro Proveedor{% endblock title %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<!--alert de bienvenida-->
+        	<ol class="breadcrumb">
+            	<li><a href="{% url 'vista_admin' %}"> Inicio</a></li>
+				<li><a href="{% url 'lista_proveedor' %}"> Proveedor</a></li>
+				<li>	Nuevo  Proveedor</li>
+            </ol>
+         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<div class="panel app-formulario">
+	 				<h4 class="text-center title-panel"> REGISTRAR PROVEEDOR </h3>
+	 			<div class="panel-body">
+
+					<form action="" method="POST" enctype='multipart/form-data' class="form-horizontal" onsubmit="return validar()">{% csrf_token %}
+							{# {{ form|crispy }} #}
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.ci.label }}</label>
+									<div class="col-md-5">
+										{{ form.ci }}<span class="help-block"></span> {{form.ci.errors}}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.nombre.label }}</label>
+									<div class="col-md-5">
+										{{ form.nombre }} {{ form.nombre.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.apellidos.label }}</label>
+									<div class="col-md-5">
+										{{ form.apellidos }} {{ form.apellidos.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.genero.label }}</label>
+									<div class="col-md-5">
+										{{ form.genero }} {{ form.genero.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-4">{{ form.empresa.label }}</label>
+									<div class="col-md-5">
+										{{ form.empresa }} {{ form.empresa.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="" class="control-label col-md-3">{{ form.email.label }}</label>
+									<div class="col-md-5">
+										{{ form.email }} {{ form.email.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-3">{{ form.telefono.label }}</label>
+									<div class="col-md-5">
+										{{ form.telefono }} {{ form.telefono.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="" class="control-label col-md-3">{{ form.domicilio.label }}</label>
+									<div class="col-md-5">
+										{{ form.domicilio }} {{ form.domicilio.errors }}<span class="help-block"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="" class="control-label col-md-3">{{ form.photo.label }}</label>
+									<div class="col-md-5">
+										{{ form.photo }} {{ form.photo.errors }}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<br>
+						<div class="row text-center">
+							<button  class="btn btn-primary btn-sm btn-flat" id="btnvalidar" type="submit"><span class="glyphicon glyphicon-floppy-save"></span>	Guardar</button>
+							<button  class="btn btn-warning btn-sm btn-flat" type="reset"><span class="icon-paint-format"></span>	Limpiar</button>
+							<a href="{% url 'lista_proveedor' %}" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+						</div><br>
+
+					</form>
+	        	</div>
+	        </div>
+    	</div>
+	</div>
+{% endblock container %}
+{% block js_1 %}
+<script type="text/javascript">
+	$(document).on("ready", inicio);
+
+	function inicio(){
+		$("span.help-block").hide();
+		$("#btnvalidar").click(function(){
+			if(val()==false && validar()==false && valido()==false && vale()==false && gener()==false && prov()==false && direc() == false && mail()==false)
+				return false;
+			else{
+				// alert("los campos estan validados");
+			}
+		});
+		$("#id_ci").keyup(val);
+		$("#id_nombre").keyup(validar);
+		$("#id_apellidos").keyup(valido);
+		$("#id_telefono").keyup(vale);
+		$("#id_genero").keyup(gener);
+		$("#id_empresa").keyup(prov);
+		$("#id_domicilio").keyup(direc);
+		$("#id_email").keyup(mail);
+	}
+
+
+	function val(){
+		var cedula = document.getElementById("id_ci").value;
+		if( cedula == "" ) {
+			$("#id_ci").parent().parent().attr("class","form-group has-error");
+			$("#id_ci").parent().children("span").text("Este campo es obligatorio").hide();
+		  	return false;
+		}
+		else if( cedula == null || cedula.length == 0 || /^\s+$/.test(cedula) ) {
+			$("#id_ci").remove();
+			$("#id_ci").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_ci").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_ci").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else{
+			if( isNaN(cedula) ){
+				$("#iconotexto").remove();
+				$("#id_ci").parent().parent().attr("class", "form-group has-error has-feedback");
+				$("#id_ci").parent().children('span').text("Ingrese solo numeros").show();
+				$("#id_ci").parent().append("<span id='glypcn"+campo+"' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+				return false;
+			}
+			else if (!(/^\d{7}$/.test(cedula))) {
+				$("#iconotexto").remove();
+				$("#id_ci").parent().parent().attr("class","form-group has-error has-feedback");
+				$("#id_ci").parent().children("span").text("Ingrese solo 7 digitos").show();
+				$("#id_ci").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+				return false;
+			}
+			else{
+				$("#iconotexto").remove();
+				$("#id_ci").parent().parent().attr("class","form-group has-success has-feedback");
+				$("#id_ci").parent().children("span").text("").hide();
+				$("#id_ci").parent().append("<span id='iconotexto' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+				return true;
+			}
+		}
+	}
+	function validar(){
+		var valor = document.getElementById("id_nombre").value;
+		if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_nombre").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z-. ]+$/.test(valor))) {
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_nombre").parent().children("span").text("Ingrese solo letras").show();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotexto").remove();
+			$("#id_nombre").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_nombre").parent().children("span").text("").hide();
+			$("#id_nombre").parent().append("<span id='iconotexto' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+	function valido(){
+		var apellido = document.getElementById("id_apellidos").value;
+		if( apellido == null || apellido.length == 0 || /^\s+$/.test(apellido) ) {
+			$("#iconotext").remove();
+			$("#id_apellidos").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_apellidos").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_apellidos").parent().append("<span id='iconotext' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z ]+$/.test(apellido))) {
+			$("#iconotext").remove();
+			$("#id_apellidos").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_apellidos").parent().children("span").text("Ingrese solo letras").show();
+			$("#id_apellidos").parent().append("<span id='iconotext' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotext").remove();
+			$("#id_apellidos").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_apellidos").parent().children("span").text("").hide();
+			$("#id_apellidos").parent().append("<span id='iconotext' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+	function vale(){
+		var telef = document.getElementById("id_telefono").value;
+		if( telef == null || telef.length == 0 || /^\s+$/.test(telef) ) {
+			$("#iconotextos").remove();
+			$("#id_telefono").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_telefono").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_telefono").parent().append("<span id='iconotextos' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[0-9- ]+$/.test(telef))) {
+			$("#iconotextos").remove();
+			$("#id_telefono").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_telefono").parent().children("span").text("Ingrese solo numeros").show();
+			$("#id_telefono").parent().append("<span id='iconotextos' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#iconotextos").remove();
+			$("#id_telefono").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_telefono").parent().children("span").text("").hide();
+			$("#id_telefono").parent().append("<span id='iconotextos' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function prov(){
+		var proveed = document.getElementById("id_empresa").value;
+		if( proveed == null || proveed.length == 0 || /^\s+$/.test(proveed) ) {
+			$("#ic").remove();
+			$("#id_empresa").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_empresa").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_empresa").parent().append("<span id='ic' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z0-9.:# ]+$/.test(proveed))) {
+			$("#ic").remove();
+			$("#id_empresa").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_empresa").parent().children("span").text("Ingrese solo letras-numeros").show();
+			$("#id_empresa").parent().append("<span id='ic' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#ic").remove();
+			$("#id_empresa").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_empresa").parent().children("span").text("").hide();
+			$("#id_empresa").parent().append("<span id='ic' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function gener(){
+		var direccion = document.getElementById("id_genero").selectedIndex;
+		if( direccion == null || direccion == 0 ) {
+			$('#id_genero').parent().parent().attr("class", "form-group has-error");
+			return false;
+		}
+		else{
+			$('#id_genero').parent().parent().attr("class", "form-group has-success");
+			return true;
+		}
+	}
+
+	function direc(){
+		var direccion = document.getElementById("id_domicilio").value;
+		if( direccion == null || direccion.length == 0 || /^\s+$/.test(direccion) ) {
+			$("#icon").remove();
+			$("#id_domicilio").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_domicilio").parent().children("span").text("Ingrese algun caracter").show();
+			$("#id_domicilio").parent().append("<span id='icon' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+		  	return false;
+		}
+		else if(!( /^[a-zA-Z0-9.:# ]+$/.test(direccion))) {
+			$("#icon").remove();
+			$("#id_domicilio").parent().parent().attr("class","form-group has-error has-feedback");
+			$("#id_domicilio").parent().children("span").text("Ingrese solo letras-numeros").show();
+			$("#id_domicilio").parent().append("<span id='icon' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			$("#icon").remove();
+			$("#id_domicilio").parent().parent().attr("class","form-group has-success has-feedback");
+			$("#id_domicilio").parent().children("span").text("").hide();
+			$("#id_domicilio").parent().append("<span id='icon' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+			return true;
+		}
+	}
+
+	function mail(){
+		var email = document.getElementById("id_email").value;
+		if( email == null || email.length == 0 || /^\s+$/.test(email) ) {
+			$("#iconot").remove();
+			$("#id_email").parent().parent().attr("class", "form-group has-error has-feedback");
+			$("#id_email").parent().children('span').text("Ingrese algun Email").show();
+			$("#id_email").parent().append("<span id='iconot' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+			return false;
+		}
+		else{
+			if (!(/\S+@\S+\.\S+/.test(email))) {
+				$("#iconot").remove();
+				$("#id_email").parent().parent().attr("class", "form-group has-error has-feedback");
+				$("#id_email").parent().children('span').text("Ingrese un Email valido").show();
+				$("#id_email").parent().append("<span id='iconot' class='glyphicon glyphicon-remove form-control-feedback'></span>");
+				return false;
+			}
+			else{
+				$("#iconot").remove();
+				$("#id_email").parent().parent().attr("class", "form-group has-success has-feedback");
+				$("#id_email").parent().children('span').hide();
+				$("#id_email").parent().append("<span id='iconot' class='glyphicon glyphicon-ok form-control-feedback'></span>");
+				return true;
+			}
+		}
+	}
+
+</script>
+{% endblock js_1 %}

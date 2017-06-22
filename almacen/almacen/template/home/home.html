@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block title %} Inicio{% endblock title %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+				<li>	Inicio </li>
+            </ol>
+        </div>
+    </div><br>
+    <div class="row">
+	    <div class="col-md-12 col-sm-12 col-xs-12">
+		    <div class="row">
+	    		<div class="col-md-6 col-md-offset-3">
+		    		{% if messages %}
+			    		<div class="alert alert-success alert-dismissable fade in" role="alert">
+							<a href="#"  class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></a>
+			    			{% for message in messages %}
+			    				<span class="glyphicon glyphicon-ok-circle"></span> &nbsp;&nbsp;&nbsp;{{ message }} {{ user.first_name|capfirst }} {{ user.last_name|capfirst }}
+			    			{% endfor %}
+			    		</div>
+			    	{% endif %}
+		    	</div>
+	    	</div>
+	       	<div class="panel app-formulario">
+
+	        		<h4 class="title-panel text-center"> BIENVENIDO  A   NUESTRO  SISTEMA DE ALMACEN </h4>
+	        	<div class="panel-body">
+	        		<img src="{% static 'img/logo.png' %}" alt="logo" class="img-responsive img-logo">
+	        	</div>
+    		</div>
+		</div>
+	</div>
+{% endblock container %}

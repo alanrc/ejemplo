@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+{% block title %} Detalle Material{% endblock title %}
+{% block css %}
+
+{% endblock css %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+            	<li><a href="{% url 'vista_admin' %}"> Inicio</a></li>
+				<li><a href="{% url 'lista_mat_salida' %}"> Salida de Material</a></li>
+				<li>	Detalle</li>
+            </ol>
+         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<div class="panel app-formulario">
+	 			<h4 class='text-center title-panel'> DETALLE DE SALIDA</h4>
+	 			<div class="panel-body">
+	 				<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<table class="table">
+								<tr><td><b>Unidad Solicitante</b></td><td>:</td><td> {{sal.funcionario.unidad}}</td></tr>
+								<tr><td><b>Solicitado por</b></td><td>:</td><td> {{sal.funcionario.nombre}} {{sal.funcionario.apellidos}}</td></tr>
+								<tr><td><b>Casa Proveedora</b></td><td>:</td><td>{{sal.material.proveedor}}</td></tr>
+								<tr><td><b>Obj. de la Solicitud</b></td><td>:</td><td> ------------</td></tr>
+							</table>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<table class="table">
+								<tr><td><b>N° de Documento</b></td> <td>:</td> <td> 0124563</td></tr>
+								<tr><td><b>Almacen</b></td> <td>:</td> <td>{{sal.material.almacen}}</td></tr>
+								<tr><td><b>Fecha de Ingreso</b></td> <td>:</td> <td> {{sal.fecha}}</td></tr>
+								<tr><td><b>N° Factura</b></td> <td>:</td> <td>000000000000000</td></tr>
+							</table>
+						</div>
+					</div>
+	 				<div class="table-responsive">
+		 				<table class="table table-bordered table-hover">
+		 					<thead class="app-thead">
+								<tr>
+									<th class="text-center">Detalle</th>
+									<th class="text-center">Cantidad</th>
+									<th class="text-center">Unidad Medida</th>
+									<th class="text-center">Precio Unitario (Bs)</th>
+									<th class="text-center">Precio Total (Bs)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<td>{{ sal.material }}</td>
+								<td class="text-center">{{ sal.cantidad }}</td>
+								<td class="text-center">{{ sal.material.unidad_medida }}</td>
+								<td class="text-center">{{ sal.precio_u }}</td>
+								<td class="text-center">{{ sal.precio_t }}</td>
+							</tbody>
+		 				</table>
+	 				</div><br>
+					<div class="row text-center">
+						<a class="btn btn-danger btn-sm btn-flat" href="{% url 'crear_kardex_salida' sal.id %}" target="_blank"><span class="fa fa-file-pdf-o"></span> Ver en PDF</a>
+						<a href="{% url 'lista_mat_salida' %}" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+					</div><br>
+
+	        	</div>
+	        </div>
+    	</div>
+	</div>
+{% endblock container %}

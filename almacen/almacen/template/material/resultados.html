@@ -1,0 +1,51 @@
+<div class="table-responsive">
+
+    <table class="table table-bordered table-hover">
+        <thead class="app-thead">
+            <tr>
+                <th class="text-center"width="15px">N°</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Marca</th>
+                <th class="text-center">Unidad de Medida</th>
+                <th class="text-center">Casa Proveedora</th>
+                <th class="text-center">Stock</th>
+                <th class="text-center" colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        {% if resultado %}
+            <tbody>
+                {% for prod in resultado %}
+                    <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td>{{ prod.nombre }}</td>
+                        <td>{{ prod.marca }}</td>
+                        <td>{{ prod.unidad_medida }}</td>
+                        <td>{{ prod.proveedor }}</td>
+                        {% if prod.stock_actual == 0 %}
+                            <td class="text-center" style="background-color:#D9534F; color:#fff;">{{ prod.stock_actual }}</td>
+                        {% elif prod.stock_actual == 1 %}
+                            <td class="text-center" style="background-color:#5bc0de; color:#fff;">{{ prod.stock_actual }}</td>
+                        {% else %}
+                            <td class="text-center" style="background-color:#5cb85c; color:#fff;">{{ prod.stock_actual }}</td>
+                        {% endif %}
+
+                        <td class="text-center app-accion">
+                            <a class="btn btn-default btn-xs  btn-flat" href="{% url 'detalle_material' prod.id %}" data-toggle="tooltip" data-placement="top" title="Detalle"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                            <a class="btn btn-success btn-xs btn-flat" href="/edit/material/{{prod.id}}/" data-toggle="tooltip" data-placement="top" title="Modificar"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-danger btn-xs btn-flat" href="{% url 'eliminar_material' prod.id  %}" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-trash">{# </span></a>&nbsp;&nbsp;<strong>||</strong>&nbsp; #}
+                        </td>
+                        <td class="text-center app-action">
+                            <a class="btn btn-primary btn-xs btn-flat" href="/ingreso/material/{{prod.id}}/" data-toggle="tooltip" data-placement="top" title="Ingreso de Material"><span class="glyphicon glyphicon-arrow-down"></span></a>
+                            <a class="btn btn-warning btn-xs btn-flat" href="/salida/material/{{prod.id}}/" data-toggle="tooltip" data-placement="top" title="Salida de Material"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        {% else %}
+            <td colspan="7" class="text-center"><p class='text-center'>No existe ningun registro con ese nombre...</p></td>
+        {% endif %}
+    </table>
+</div>
+
+
+

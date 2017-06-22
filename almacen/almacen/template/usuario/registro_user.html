@@ -1,0 +1,91 @@
+{% extends 'base/base2.html' %}
+{% load staticfiles %}
+{% block title %} EMAP | Registro {% endblock title %}
+{% block css %}
+   <style>
+      .title-panel {
+         font-family: fantasy !important;
+         border-bottom: 2px solid #2DA88D ;
+         border-left: 150px;
+         padding-bottom: 5px;
+      }
+   </style>
+{% endblock css %}
+{% block container %}
+    {% if messages %}
+        <div class="alerta">
+            <div class="alert alert-danger" role="alert">
+                {% for message in messages  %}
+                    <p class="text-justique">{{ message }}&nbsp;&nbsp;&nbsp; Por favor verifique.</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <div class="container">
+       <div class="col-md-offset-4 col-md-4">
+          <h4 class="title-panel text-center">REGISTRO DE USUARIO</h4>
+       </div>
+    </div>
+
+    <div class="container well" id="app-login">
+      	<div class="row">
+        	<div class="col-xs-12">
+          		<img src="{% static 'img/personal.png' %}" alt="avatar" class='img-responsive' id="avatar">
+        	</div>
+      	</div>
+
+      	<form action="" method='POST' class='login'>{% csrf_token %}
+        	<div class="form-group">
+          		<input type="text" class='form-control' name='username' placeholder='Usuario' required autofocus>
+        	</div>
+          <div class="form-group">
+              <input type="email" class="form-control" name='email' placeholder='Correo Electronico' required>
+          </div>
+          <div class="form-group">
+              <input type="password" class="form-control" name='password' placeholder='Contraseña' required>
+          </div>
+        	<div class="form-group">
+          		<input type="password" class="form-control" name='repassword' placeholder='Confirmar Contraseña' required>
+        	</div>
+
+        	<button type="submit" class="btn btn-lg btn-primary btn-block" id="enviar">Registrarse</button><br>
+
+         <div><img src="" alt="" id="imagen"><span id="mensajes"></span></div>
+      	</form>
+
+    </div>
+{% endblock container %}
+
+{% block js %}
+   <script type="text/javascript">
+      $(function(){
+         $('#enviar').on('click', function(e){
+            e.preventDefault();
+
+            var nombre = $("#nombre").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var repassword = $("#repassword").val();
+
+            $.ajax({
+               type: "POST",
+               url: "",
+               data: {'nombre='+nombre+'&email='+email+'password='+password+'repassword='+repassword},
+                  beforeSend: function(){
+            $("#imagen").show();
+            $("#mensajes").html('Procesando datos..');
+               },
+               success: function(respuesta){
+                  $("#imagen").hide();
+                  if (respuesta==1){
+                     $("#mensajes").html('Usted se registro exitosamente');
+                  }
+                  else{
+                     $("#mensajes").html('Usted no se pudo registrar')
+                  }
+               }
+            });
+         })
+      })
+  </script>
+{% endblock js %}

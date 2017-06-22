@@ -1,0 +1,107 @@
+{% extends "base/base.html" %}
+{% block title %} Ingreso Materiales {% endblock title %}
+{% block css %}
+	<style>
+		.app-pagination {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		.app-text-pagination {
+			margin-top: 5px;
+		}
+	</style>
+{% endblock css %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+				<li><a href="{% url 'vista_admin' %}">	Inicio</a></li>
+				<li><a href="{% url 'lista_material' %}">	Material</a></li>
+				<li>	Ingreso de Material</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row app-search ">
+		<div class="col-md-6 col-sm-6 col-xs-6">
+			<!--a class="btn btn-success btn-sm" href="#"><span class="glyphicon glyphicon-plus"></span> Agregar l</a-->
+		</div>
+        <div class="col-md-6 col-sm-6  col-xs-6 ">
+        	<a class="btn btn-warning btn-sm pull-right btn-flat" href="{% url 'buscar_ingreso' %}"><span class="glyphicon glyphicon-search"></span> Buscar Ingresos</a>
+        	<!--form action="" role="search">{% csrf_token %}
+            	<div class="input-group add-on">
+            		<input class="form-control input-sm"  type="search" id="buscar" placeholder=" Ingrese su busqueda..">
+                	<div class="input-group-btn ">
+                  		<button class="btn btn-warning btn-sm" type="submit"><i class="glyphicon glyphicon-search "></i></button>
+                	</div>
+              	</div>
+            </form-->
+        </div>
+    </div>
+    <div class="row">
+	    <div class="col-md-12 col-sm-12 col-xs-12">
+	    	<div class="row">
+	    		<div class="col-md-6 col-md-offset-3">
+		    		{% if messages %}
+			    		<div class="alert alert-success alert-dismissable fade in" role="alert">
+							<a href="#"  class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></a>
+			    			{% for message in messages %}
+			    				<span class="glyphicon glyphicon-ok-circle"></span> &nbsp;&nbsp;&nbsp;{{ message }}
+			    			{% endfor %}
+			    		</div>
+			    	{% endif %}
+		    	</div>
+	    	</div>
+	       	<div class="panel app-formulario">
+				<h4 class='text-center title-panel'> INGRESO DE MATERIALES </h4>
+	        	<div class="panel-body">
+
+					<div class="table-responsive">
+
+						<table class="table table-bordered table-hover tble-striped">
+							<thead class="app-thead">
+								<tr>
+									<th class="text-center" width="15px">N°</th>
+									<th class="text-center">Descripcion</th>
+									<th class="text-center">Cantidad</th>
+									<th class="text-center">Unidad Medida</th>
+									<th class="text-center">Precio Unitario (Bs)</th>
+									<th class="text-center">Precio Total (Bs)</th>
+									<th class="text-center">Fecha de Ingreso</th>
+									<th class="text-center">Acciones</th>
+								</tr>
+							</thead>
+							{% if object_list %}
+								<tbody>
+									{% for prod_ing in object_list %}
+										<tr>
+											<td class="text-center">{{ forloop.counter }}</td>
+											<td>{{ prod_ing.material }}</td>
+											<td class="text-center">{{ prod_ing.cantidad }}</td>
+											<td>{{ prod_ing.material.unidad_medida.nombre }}</td>
+											<td class="text-center">{{ prod_ing.precio_u }}</td>
+											<td class="text-center">{{ prod_ing.precio_t }}</td>
+											<td class="text-center">{{ prod_ing.fecha_i|date:"d / m / Y"  }}</td>
+											<td class="text-center">
+												<a class="btn btn-default btn-xs  btn-flat" href="/detalle/ingreso/{{prod_ing.id}}/" data-toggle="tooltip" data-placement="top" title="Detalle"><span class="glyphicon glyphicon-zoom-in"></span></a>
+												<!--a class="btn btn-success btn-xs btn-flat disabled" href="" data-toggle="tooltip" data-placement="top" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a-->
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							{% else %}
+							<td colspan="8"><p class='text-center'>No hay registros de materiales ingresados...</p></td>
+
+							{% endif %}
+						</table>
+
+					</div>
+					{% include "_pagination.html" %}
+                <p class="app-text-pagination">Visualizando pagina <b>{{ page_obj.number }}</b> de <b>{{ paginator.num_pages }}</b></p>
+
+
+	        	</div>
+    		</div>
+		</div>
+	</div>
+{% endblock container %}

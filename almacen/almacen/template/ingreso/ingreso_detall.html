@@ -1,0 +1,75 @@
+{% extends "base/base.html" %}
+{% block title %} Detalle Material{% endblock title %}
+{% block css %}
+
+{% endblock css %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+            	<li><a href="{% url 'vista_admin' %}"> Inicio</a></li>
+				<li><a href="{% url 'lista_mat_ingreso' %}"> Ingreso de Material</a></li>
+				<li>	Detalle</li>
+            </ol>
+         </div>
+    </div>
+    <div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<div class="panel app-formulario">
+	 			<h4 class='text-center title-panel'> DETALLE DE INGRESO</h4>
+	 			<div class="panel-body">
+	 				<!--div class="row">
+	 					id producto: {{ing.material.id}} <br>
+						id ingreso: {{ing.id}} <br>
+	 				</div-->
+	 				<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<table class="table">
+								<tr><td><b>Unidad Solicitante</b></td><td>:</td><td> {{ing.funcionario.unidad}}</td></tr>
+								<tr><td><b>Solicitado por</b></td><td>:</td><td> {{ing.funcionario.nombre}}&nbsp;{{ing.funcionario.apellidos}}</td></tr>
+								<tr><td><b>Casa Proveedora</b></td><td>:</td><td>{{ ing.material.proveedor }}</td></tr>
+								<tr><td><b>Obj. de la Solicitud</b></td><td>:</td><td> {{ing.objeto}}</td></tr>
+							</table>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<table class="table">
+								<tr><td><b>N° de Documento</b></td> <td>:</td> <td> 0124563</td></tr>
+								<tr><td><b>Almacen</b></td> <td>:</td> <td>{{ ing.material.almacen }}</td></tr>
+								<tr><td><b>Fecha de Ingreso</b></td> <td>:</td> <td> {{ing.fecha_i}}</td></tr>
+								<tr><td><b>N° Factura</b></td> <td>:</td> <td>{{ ing.num_factura }}</td></tr>
+							</table>
+						</div>
+					</div>
+	 				<div class="table-responsive">
+		 				<table class="table table-bordered table-hover">
+		 					<thead class="app-thead">
+								<tr>
+									<th class="text-center">Detalle</th>
+									<th class="text-center">Cantidad</th>
+									<th class="text-center">Unidad Medida</th>
+									<th class="text-center">Precio Unitario (Bs)</th>
+									<th class="text-center">Precio Total (Bs)</th>
+									<th class="text-center">Observaciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<td>{{ ing.material }}</td>
+								<td class="text-center">{{ ing.cantidad }}</td>
+								<td class="text-center">{{ ing.material.unidad_medida }}</td>
+								<td class="text-center">{{ ing.precio_u }}</td>
+								<td class="text-center">{{ ing.precio_t }}</td>
+								<td class="text-center">{{ ing.observacion }}</td>
+							</tbody>
+		 				</table>
+	 				</div><br>
+					<div class="row text-center">
+						<a class="btn btn-danger btn-sm btn-flat" href="{% url 'kardex_ingreso' ing.id %}" target="_blank"><span class="fa fa-file-pdf-o"></span> Ver en PDF</a>
+						<a href="{% url 'lista_mat_ingreso' %}" class="btn btn-default btn-sm btn-flat"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+					</div><br>
+
+	        	</div>
+	        </div>
+    	</div>
+	</div>
+{% endblock container %}

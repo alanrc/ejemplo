@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html" />
+		<style>
+			@page {
+				size: letter landscape;
+					margin-top: 4cm;
+					margin-right: 1cm;
+					margin-bottom: 2cm;
+					margin-left: 2cm;
+				@frame header_frame {
+					-pdf-frame-content: headerContent;
+					font-size: 12;
+					top: 2cm;
+				}
+				@frame footer {
+					-pdf-frame-content: footerContent;
+					bottom: 1cm;
+					margin-left: 1cm;
+					max-height: 1cm;
+					height: 0;
+				}
+			}
+			.hrline {border: none;height: 1px;color: #333;background-color: #fff; width: 5%;}
+			.deta{text-align: left !important; padding: 3px; font-size: 11px;}
+			.numero{text-align: right !important; font-size: 11px; padding: 5px 10px 2px 0px;}
+			#table-th {border: 1px solid #000; padding: 2px;}
+			#table-td {border: 1px solid #000; padding: 3px;}
+			#td-total {border: 2px solid #000; padding: 2px;}
+		</style>
+	</head>
+	<body>
+		<div id="headerContent">
+			<table>
+				<tr><td><center><b>ENTIDAD MUNICIPAL DE ASEO POTOSI</b></center></td></tr>
+				<tr><td><center><b>"EMAP"</b></center></td></tr>
+				<tr><td><center>KARDEX FISICO VALORADO</center></td></tr>
+			</table>
+		</div>
+
+		<hr class="hrline">
+
+		<div class="numero">
+			<table border="0.1" align="right">
+				<tr><td width="130px" style="background-color:#EEEAEA">N° &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 123456789</td></tr>
+			</table>
+		</div>
+
+		<div class="deta">
+			<table border="">
+				<tr><td width="25%"><b>Material</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>FILTRO DE ACEITE</td></tr>
+				<tr><td width="25%"><b>Unidad de Medida</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td> Pieza (s)</td></tr>
+				<tr><td width="25%"><b>Marca</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td> robaster</td></tr>
+				<tr><td width="25%"><b>Serie</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>null</td></tr>
+				<tr><td width="25%"><b>Codigo</b></td><td width="3px"><b>:</b></td ><td width="10px"></td><td>true</td></tr>
+			</table>
+		</div><br />
+
+		<tr><td><b>DETALLE  DE  MOVIMIENTO</b></td></tr>
+
+		<table border:1px solid #000; border-collapse: collapse;>
+			<thead>
+				<tr id="table-th">
+					<th colspan="3">FECHA</th>
+					<th rowspan="2" width="13%">N° de FACTURA</th>
+					<th rowspan="2" width="">DESCRIPCION</th>
+					<th rowspan="2" width="12%"> N° null</th>
+					<th colspan="3" width="">FISICO</th>
+					<th rowspan="2" width="12%">PRECIO UNITARIO</th>
+					<th colspan="3" width="">VALORES</th>
+				</tr>
+				<tr id="table-th">
+					<th width="7%">D</th>
+					<th width="7%">M</th>
+					<th width="9%">A</th>
+					<th width="10%">Entrada</th>
+					<th width="9%">Salida</th>
+					<th width="9%">Saldo</th>
+					<th width="12%">Entrada</th>
+					<th width="12%">Salida</th>
+					<th width="12%">Saldo</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="table-td">
+					<td><center>15</center></td>
+					<td><center>06</center></td>
+					<td><center>2017</center></td>
+					<td><center>000694</center></td>
+					<td><center>INGRESO A ALMACENES  -INGRESO A ALMACENES</center></td>
+					<td><center># 53 - B</center></td>
+					<td><center>4</center></td>
+					<td><center></center></td>
+					<td><center>4</center></td>
+					<td><center>248.00</center></td>
+					<td><center>992.00</center></td>
+					<td><center>1598.00</center></td>
+					<td><center>992.00</center></td>
+				</tr>
+			</tbody>
+
+			<tr id="td-total" >
+				<td><center>16</center></td>
+				<td><center>06</center></td>
+				<td><center>2017</center></td>
+				<td><center></center></td>
+				<td><center>SALDO A LA FECHA</center></td>
+				<td><center></center></td>
+				<td><center></center></td>
+				<td><center></center></td>
+				<td><center>1</center></td>
+				<td><center></center></td>
+				<td><center></center></td>
+				<td><center></center></td>
+				<td style="background-color: #EEEAEA;"><center>0000000</center></td>
+			</tr>
+		</table>
+
+		<div id="footerContent">
+			Página: <pdf:pagenumber> de <pdf:pagecount>
+		</div>
+
+	</body>
+</html>

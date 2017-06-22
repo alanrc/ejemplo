@@ -1,0 +1,37 @@
+{% extends 'base/base1.html' %}
+{% block title %} E.M.A.P. | User Active{% endblock title %}
+{% block css %}
+	<style>
+		.panel-personalizado {background-color: #40AC62; color: #fff;}
+		.errorlist li{ 
+			background-color: #f2dede;
+			color: #a94442; 
+			display: block; 
+			border-color: #ebccd1; 
+			position: absolute;
+			width: auto; 
+			font-size: 12px;  
+			min-width:150px;
+			margin-left: 150px;
+			margin-top: -10px; 
+			text-align: justify;
+		}
+	</style>
+{% endblock css %}
+{% block container %}
+	<div class="panel">
+		<div class="panel-heading panel-personalizado">
+			<h3 class="panel-title"><p class="text-center">Activar Usuario</p></h3>
+		</div>
+		<div class="panel-body">
+			<form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+				{{ formulario.as_table }}
+				<br>
+				<div class="row text-center">
+					<input class="btn btn-primary " type="submit" value="Activar Cuenta">
+				</div>
+			</form>
+		</div>
+	</div>
+	
+{% endblock container %}

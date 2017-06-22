@@ -1,0 +1,108 @@
+.img-profile {
+    width: 70%;
+    height: 50%;
+    margin: 0px auto  10px;
+    display: block;
+    border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+}
+
+
+
+.app-profile .app-user-heading {
+    background: #ff766c;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    padding: 30px;
+    text-align: center;
+    border-radius: 0px !important;
+    margin-top: 15px;
+}
+
+.app-profile .app-user-heading .round a  {
+    border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+    border: 10px solid rgba(255,255,255,0.3);
+    display: inline-block;
+}
+
+.app-profile ul {
+    margin-top: 1px;
+}
+
+.app-profile ul > li {
+    border-bottom: 1px solid #ebeae6;
+    margin-top: 0;
+    line-height: 30px;
+}
+
+.app-profile ul > li:last-child {
+    border-bottom: none;
+}
+
+.app-profile ul > li > a {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    color: #89817f;
+    border-left: 5px solid #fff;
+}
+
+.app-profile ul > li > a:hover, .app-profile ul > li > a:focus, .app-profile ul li.active  a {
+    background: #f8f7f5 !important;
+    border-left: 5px solid #ff766c;
+    color: #89817f !important;
+}
+
+.app-profile ul > li:last-child > a:last-child {
+    border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+}
+
+.app-profile ul > li > a > i{
+    font-size: 16px;
+    padding-right: 10px;
+    color: #bcb3aa;
+}
+
+.profile-info  {
+    background-color:#f8f7f5 ;
+    border-top: 1px solid #e7ebee;
+}
+
+.app-profile-info {
+    color: #7a7a7a;
+    margin-top: 15px;
+}
+
+.app-profile-heading {
+    background: #41cac0;
+    color: #fff;
+    text-align: center;
+    font-style: italic;
+    /*border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;*/
+    font-size: 16px;
+    font-weight: 300;
+    border-radius: 0px !important;
+}
+
+.app-profile-body{
+    color: #89817e;
+}
+
+.bio-row {
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+    padding:0 15px;
+}
+
+.bio-row p span {
+    width: 100px;
+    display: inline-block;
+    font-weight: bold;
+    margin-left: 50px;
+}

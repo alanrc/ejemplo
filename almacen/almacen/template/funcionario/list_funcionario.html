@@ -1,0 +1,109 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} Funcionario {% endblock title %}
+
+{% block css %}
+	<style>
+		.app-pagination {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		.app-text-pagination {
+			margin-top: 5px;
+		}
+	</style>
+{% endblock css %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+        	<ol class="breadcrumb">
+				<li><a href="/inicio/">	Inicio</a></li>
+				<li>	Funcionario</li>
+            </ol>
+        </div>
+    </div>
+	<div class="row app-search ">
+		<div class="col-md-6 col-xs-12">
+			<a class="btn btn-success btn-sm btn-flat" href="{% url 'registrar_funcionario' %}"><span class="glyphicon glyphicon-plus"></span> Agregar Funcionario</a>
+		</div>
+        <div class="col-md-6  col-xs-12">
+        	<a class="btn btn-warning btn-sm pull-right btn-flat" href="{% url 'buscar_funcionario' %}"><span class="glyphicon glyphicon-search"></span> Buscar Funcionario</a>
+        	<!--form action="" role="search">{% csrf_token %}
+            	<div class="input-group add-on">
+            		<input class="form-control input-sm"  type="search"placeholder=" Ingrese su busqueda..">
+                	<div class="input-group-btn ">
+                  		<button class="btn btn-warning btn-sm" type="submit"><i class=" "></i></button>
+                	</div>
+              	</div>
+            </form-->
+        </div>
+    </div>
+
+    <div class="row">
+	    <div class="col-md-12 col-sm-12 col-xs-12">
+	    	<div class="row">
+	    		<div class="col-md-6 col-md-offset-3">
+		    		{% if messages %}
+			    		<div class="alert alert-success alert-dismissable fade in" role="alert">
+							<a href="#"  class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></a>
+			    			{% for message in messages %}
+			    				<span class="glyphicon glyphicon-ok-circle"></span> &nbsp;&nbsp;&nbsp;{{ message }}
+			    			{% endfor %}
+			    		</div>
+			    	{% endif %}
+		    	</div>
+	    	</div>
+	       	<div class="panel app-formulario">
+	       		<h4 class="title-panel text-center">FUNCIONARIOS</h4>
+	        	<div class="panel-body">
+					<div class="table-responsive">
+							<table class="table table-bordered table-hover">
+								<thead class="app-thead">
+									<tr>
+										<th class="text-center" width="15px">N°</th>
+										<th class="text-center">C.&nbsp;&nbsp;&nbsp; I.</th>
+										<th class="text-center">Nombre</th>
+										<th class="text-center">Apellidos</th>
+										<th class="text-center">Cargo</th>
+										<th class="text-center">Direccion</th>
+										<th class="text-center">Acciones</th>
+									</tr>
+								</thead>
+								{% if object_list %}
+										<tbody>
+											{% for fun in object_list %}
+												<tr>
+													<td class="text-center">{{ forloop.counter }}</td>
+													<td class="text-center">{{ fun.ci }}</td>
+													<td>{{ fun.nombre }}</td>
+													<td>{{ fun.apellidos }}</td>
+													<td>{{ fun.cargo }}</td>
+													<td>{{ fun.direccion }}</td>
+													<td class="text-center">
+														<a class="btn btn-default btn-xs btn-flat" href="{% url 'detalle_funcionario' fun.id %}" data-toggle="tooltip" data-placement="top" title="Detalle"><span class="glyphicon glyphicon-zoom-in"></span></a>
+														<a class="btn btn-success btn-xs btn-flat" href="{% url 'modificar_funcionario' fun.id %}" data-toggle="tooltip" data-placement="top" title="Modificar"><span class="glyphicon glyphicon-pencil"></span></a>
+														<a class="btn btn-danger btn-xs btn-flat" href="{% url 'eliminar_funcionario' fun.id %}" data-toggle="tooltip" data-placement="top" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+													</td>
+												</tr>
+											{% endfor %}
+										</tbody>
+
+								{% else %}
+								<td colspan="7"><p class='text-center'>No hay registros de funcionarios..</p></td>
+
+								{% endif %}
+							</table>
+					</div>
+					{% include "_pagination.html" %}
+                	<p class="app-text-pagination">Visualizando pagina <b>{{ page_obj.number }}</b> de <b>{{ paginator.num_pages }}</b></p>
+
+	        	</div>
+    		</div>
+		</div>
+	</div>
+{% endblock container %}
+<!--****  para regresar  ***
+<a href="javascript:window.history.go(-1);"> Regresar a la lista</a>-->
+
+

@@ -1,0 +1,13 @@
+{% extends 'usuario/login.html' %}
+{% block error %}
+    <div class=" alerta">
+      	<div class="alert alert-block alert-danger fade in" role="alert">
+        	<!--<button data-dismiss="alert" class="close close-sm" type="button"><span>&times;</span> </button>-->
+        	<p class='text-justiquer'>Los datos del usuario o la contraseña son incorrectos. &nbsp;&nbsp;&nbsp;Por favor verifique.</p>
+      	</div>    
+    </div>
+{% endblock error %}
+
+{% block help_bl %}
+	<p class=" help-block app-help-block text-center"><a href="#">Olvidaste tu Contraseña?</a></p>
+{% endblock help_bl %}
